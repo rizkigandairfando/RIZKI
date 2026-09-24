@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SMARTTEACHER – Platform Perangkat Pembelajaran Guru</title>
+<meta name="description" content="Platform digital untuk membantu guru membuat Modul Ajar, RPP, ATP, LKPD, asesmen, kisi-kisi, soal, dan rubrik penilaian.">
+<style>
+:root{--bg:#f5f8fd;--cd:#fff;--tx:#12203a;--mu:#5b6b85;--pr:#1d5fd8;--p2:#e8f0fe;--bd:#e0e7f3;--dg:#d93025;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1424;--cd:#151e33;--tx:#e8eefb;--mu:#93a3c0;--pr:#5b8def;--p2:#1b2a4d;--bd:#26324d}}
+:root[data-theme="dark"]{--bg:#0d1424;--cd:#151e33;--tx:#e8eefb;--mu:#93a3c0;--pr:#5b8def;--p2:#1b2a4d;--bd:#26324d}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}html,body{margin:0}
+body{background:var(--bg);color:var(--tx);font:15px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+h1,h2,h3{line-height:1.25}.mu{color:var(--mu)}
+a{cursor:pointer}
+.b{background:var(--pr);color:#fff;border:0;border-radius:10px;padding:9px 16px;font:inherit;font-weight:600;cursor:pointer}
+.b.s{background:var(--p2);color:var(--pr)}.b.d{background:var(--dg)}.b.l{padding:14px 26px;font-size:16px}
+input,select,textarea{width:100%;padding:9px 11px;border:1px solid var(--bd);border-radius:10px;background:var(--cd);color:var(--tx);font:inherit}
+label{display:block;font-size:13px;font-weight:600;color:var(--mu)}label input,label select,label textarea{margin-top:4px;font-weight:400}
+.g{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(210px,1fr))}
+.c{background:var(--cd);border:1px solid var(--bd);border-radius:16px;padding:18px;box-shadow:0 2px 10px rgba(20,40,90,.05)}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+nav.top{display:flex;justify-content:space-between;align-items:center;padding:14px 20px}
+.logo{font-weight:800;color:var(--pr);letter-spacing:.5px;font-size:17px}
+.hero{text-align:center;padding:56px 0 40px}.hero h1{font-size:clamp(28px,5vw,46px);margin:0 0 14px}
+.hero p{max-width:640px;margin:0 auto 24px;color:var(--mu);font-size:17px}
+.hero .b{margin:4px}.ic{font-size:26px}
+.auth{max-width:400px;margin:40px auto;display:grid;gap:12px}
+.shell{display:flex;min-height:100vh}
+aside{width:230px;background:var(--cd);border-right:1px solid var(--bd);padding:16px;display:flex;flex-direction:column;gap:4px;position:sticky;top:0;height:100vh}
+aside a{padding:10px 12px;border-radius:10px;color:var(--tx)}aside a.on,aside a:hover{background:var(--p2);color:var(--pr)}
+aside .logo{margin-bottom:12px}
+main{flex:1;min-width:0;padding:0 22px 40px}
+main>header{display:flex;gap:10px;align-items:center;justify-content:flex-end;padding:14px 0}
+.ham{display:none;background:none;border:0;font-size:22px;color:var(--tx);margin-right:auto}
+.st{font-size:28px;font-weight:800;color:var(--pr)}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%}
+.tw th,.tw td{padding:9px 8px;border-bottom:1px solid var(--bd);text-align:left;white-space:nowrap}
+.tw td button{margin:0 2px 2px 0;padding:4px 8px;font-size:12px}
+.bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:10px}
+.bar input{flex:1;min-width:180px;font-weight:700}
+.tb button{background:var(--cd);border:1px solid var(--bd);color:var(--tx);border-radius:8px;padding:5px 10px;cursor:pointer;font:inherit}
+.paper{background:#fff;color:#111;max-width:794px;margin:14px auto;padding:48px 52px;min-height:500px;border:1px solid var(--bd);box-shadow:0 4px 24px rgba(0,0,0,.12);font-family:Arial,sans-serif;font-size:13px;outline:none;overflow-x:auto}
+.paper h1{font-size:20px}.paper h2{font-size:15px;margin:18px 0 6px;border-bottom:1px solid #ccc;padding-bottom:3px}
+.paper table{width:100%;margin:6px 0}.paper td,.paper th{border:1px solid #888;padding:5px 7px;vertical-align:top}
+.ov{position:fixed;inset:0;background:rgba(10,20,40,.5);display:flex;align-items:center;justify-content:center;padding:20px;z-index:50}
+.ov .c{max-width:420px;width:100%;max-height:80vh;overflow:auto}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:#12203a;color:#fff;padding:10px 18px;border-radius:12px;z-index:99;box-shadow:0 6px 20px rgba(0,0,0,.3)}
+.toast.e{background:var(--dg)}
+.f2{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
+.pg{height:8px;background:var(--p2);border-radius:9px;overflow:hidden}.pg i{display:block;height:100%;background:var(--pr)}
+@media(max-width:800px){aside{position:fixed;left:-260px;z-index:40;transition:left .2s;width:240px}aside.open{left:0}.ham{display:block}main{padding:0 14px 40px}.paper{padding:22px 18px}}
+@media print{aside,main>header,.bar,.tb,.toast{display:none!important}body,main{background:#fff;padding:0}.paper{border:0;box-shadow:none;margin:0;padding:0;max-width:none}@page{size:A4;margin:2cm}}
+</style></head><body><div id="app"></div>
+<script>
+const $=s=>document.querySelector(s),A=$('#app');
+const L=(k,d)=>{try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}};
+const W=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v));return true}catch(e){toast('Penyimpanan browser tidak tersedia. Data belum tersimpan.','e');return false}};
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const uid=()=>Math.random().toString(36).slice(2,10),fd=t=>new Date(t).toLocaleDateString('id-ID',{day:'numeric',month:'short',year:'numeric'});
+let U=null,V='landing',X={},T;
+const users=()=>L('st_u',[]),docs=()=>U?L('st_d_'+U.id,[]):[],setDocs=d=>W('st_d_'+U.id,d);
+const TY={modul:'Modul Ajar',rpp:'RPP',tp:'Tujuan Pembelajaran',lkpd:'LKPD',rubrik:'Rubrik Penilaian'};
+const IC={modul:'📚',rpp:'📝',tp:'🎯',lkpd:'📖',rubrik:'⭐'};
+function toast(m,t){const e=document.createElement('div');e.className='toast '+(t||'');e.textContent=m;document.body.append(e);setTimeout(()=>e.remove(),3000)}
+function modal(h){const o=document.createElement('div');o.className='ov';o.innerHTML='<div class="c">'+h+'</div>';o.onclick=e=>{if(e.target==o)o.remove()};document.body.append(o);return o}
+const closeM=()=>document.querySelector('.ov')?.remove();
+async function hash(p,s){try{const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s+':'+p));return[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}catch(e){return btoa(s+p)}}
+function go(v,x){persist();V=v;X=x||{};render();scrollTo(0,0)}
+function render(){
+ if(!U&&!['landing','login','register'].includes(V))V='landing';
+ ({landing:vLanding,login:()=>vAuth(0),register:()=>vAuth(1),dash:vDash,create:vCreate,form:vForm,docs:vDocs,profile:vProfile,editor:vEditor})[V]()}
+const shell=(h,a)=>`<div class="shell"><aside id="sb"><div class="logo">🎓 SMARTTEACHER</div>${[['dash','🏠 Dashboard'],['create','📄 Buat Perangkat'],['docs','📁 Dokumen Saya'],['profile','👤 Profil Guru']].map(([k,t])=>`<a class="${a==k?'on':''}" onclick="go('${k}')">${t}</a>`).join('')}<a onclick="logout()" style="margin-top:auto">↩ Keluar</a></aside><main><header><button class="ham" onclick="$('#sb').classList.toggle('open')" aria-label="Menu">☰</button><span class="mu">${esc(U.name)}</span></header>${h}</main></div>`;
+function vLanding(){A.innerHTML=`<nav class="top wrap"><span class="logo">🎓 SMARTTEACHER</span><span><button class="b s" onclick="go('login')">Masuk</button> <button class="b" onclick="go('register')">Daftar</button></span></nav>
+<div class="wrap"><section class="hero"><h1>Perangkat Pembelajaran Lebih Mudah dengan SMARTTEACHER</h1><p>Buat Modul Ajar, RPP, ATP, LKPD, asesmen, kisi-kisi, rubrik penilaian, dan berbagai perangkat pembelajaran lainnya dalam satu platform.</p><button class="b l" onclick="go('register')">Mulai Sekarang</button><button class="b s l" onclick="document.getElementById('fitur').scrollIntoView({behavior:'smooth'})">Lihat Fitur</button></section>
+<section id="fitur" class="g">${[['📚','Modul Ajar','Buat modul ajar secara terstruktur dan dapat diedit.'],['📝','RPP','Buat RPP dengan format yang dapat disesuaikan.'],['🎯','Tujuan Pembelajaran','Bantu guru menyusun tujuan pembelajaran.'],['📖','LKPD','Buat lembar kerja peserta didik siap cetak.'],['⭐','Rubrik Penilaian','Buat rubrik berdasarkan aktivitas atau tugas.'],['⬇️','Unduh & Cetak','Ekspor ke Word (.docx) dan cetak ke PDF.']].map(([i,t,d])=>`<div class="c"><div class="ic">${i}</div><h3>${t}</h3><p class="mu">${d}</p></div>`).join('')}</section>
+<p class="mu" style="text-align:center;margin:40px 0">SMARTTEACHER – Solusi Cerdas untuk Perangkat Pembelajaran Guru</p></div>`}
+function vAuth(reg){A.innerHTML=`<div class="wrap"><form class="auth c" onsubmit="return false"><div class="logo">🎓 SMARTTEACHER</div><h2 style="margin:0">${reg?'Daftar Akun':'Masuk'}</h2>${reg?'<label>Nama lengkap<input id="a_n" autocomplete="name"></label>':''}<label>Email<input id="a_e" type="email" autocomplete="email"></label><label>Password<input id="a_p" type="password" autocomplete="${reg?'new-password':'current-password'}"></label>${reg?'<label>Konfirmasi password<input id="a_c" type="password"></label>':''}<button class="b" onclick="${reg?'doReg()':'doLogin()'}">${reg?'Daftar':'Masuk'}</button><span class="mu">${reg?'Sudah punya akun? <a style="color:var(--pr)" onclick="go(\'login\')">Masuk</a>':'Belum punya akun? <a style="color:var(--pr)" onclick="go(\'register\')">Daftar</a>'}</span><a class="mu" onclick="go('landing')">← Kembali</a></form></div>`}
+async function doReg(){const n=$('#a_n').value.trim(),e=$('#a_e').value.trim().toLowerCase(),p=$('#a_p').value;
+ if(n.length<3)return toast('Nama lengkap minimal 3 karakter.','e');if(!/^\S+@\S+\.\S+$/.test(e))return toast('Format email tidak valid.','e');if(p.length<8)return toast('Password minimal 8 karakter.','e');if(p!==$('#a_c').value)return toast('Konfirmasi password tidak sama.','e');
+ const us=users();if(us.some(u=>u.email==e))return toast('Email sudah terdaftar.','e');
+ const u={id:uid(),name:n,email:e,h:await hash(p,e),p:{name:n,email:e}};us.push(u);if(!W('st_u',us))return;W('st_s',u.id);U=u;toast('Registrasi berhasil. Lengkapi profil Anda.');go('profile',{setup:1})}
+async function doLogin(){const e=$('#a_e').value.trim().toLowerCase(),h=await hash($('#a_p').value,e),u=users().find(x=>x.email==e&&x.h==h);
+ if(!u)return toast('Email atau password salah.','e');W('st_s',u.id);U=u;go(u.p.sekolah?'dash':'profile',{setup:!u.p.sekolah})}
+function logout(){persist();try{localStorage.removeItem('st_s')}catch(e){}U=null;go('landing')}
+const PF=[['name','Nama lengkap'],['gelar','Gelar'],['nip','NIP'],['nuptk','NUPTK'],['hp','Nomor telepon'],['sekolah','Nama sekolah *'],['npsn','NPSN'],['alamat','Alamat sekolah'],['kepsek','Kepala sekolah'],['jenjang','Jenjang'],['mapel','Mata pelajaran *'],['kelas','Kelas'],['fase','Fase'],['tahun','Tahun ajaran']];
+function vProfile(){const p=U.p;A.innerHTML=shell(`<h1>${X.setup?'Setup Profil Guru':'Profil Guru'}</h1><p class="mu">Data ini terisi otomatis saat Anda membuat perangkat. Kosongkan jika belum ada; SMARTTEACHER tidak mengisi data pribadi untuk Anda.</p><div class="c"><div class="f2">${PF.map(([k,l])=>k=='jenjang'?`<label>${l}<select id="p_${k}">${['','SD/MI','SMP/MTs','SMA/MA','SMK','Pendidikan Khusus'].map(o=>`<option ${p[k]==o?'selected':''}>${o}</option>`).join('')}</select></label>`:`<label>${l}<input id="p_${k}" value="${esc(p[k])}"></label>`).join('')}</div><p><button class="b" onclick="saveProf()">Simpan Profil</button></p></div>`,'profile')}
+function saveProf(){const p={};PF.forEach(([k])=>p[k]=$('#p_'+k).value.trim());
+ if(!p.name||!p.sekolah||!p.mapel)return toast('Nama, sekolah, dan mata pelajaran wajib diisi.','e');
+ U.p=p;U.name=p.name;const us=users();us[us.findIndex(u=>u.id==U.id)]=U;if(W('st_u',us)){toast('Profil tersimpan.');go('dash')}}
+function rows(l){return l.length?`<div class="tw"><table><tr><th>Nama Dokumen</th><th>Jenis</th><th>Mapel</th><th>Kelas</th><th>Tahun Ajaran</th><th>Terakhir Diubah</th><th>Aksi</th></tr>${l.map(d=>`<tr><td><b>${esc(d.title)}</b></td><td>${TY[d.type]}</td><td>${esc(d.m.mapel)}</td><td>${esc(d.m.kelas)}</td><td>${esc(d.m.tahun)}</td><td>${fd(d.updated)}</td><td><button class="b s" onclick="go('editor',{id:'${d.id}',pv:1})">Lihat</button><button class="b s" onclick="go('editor',{id:'${d.id}'})">Edit</button><button class="b s" onclick="dup('${d.id}')">Duplikat</button><button class="b s" onclick="dl('${d.id}')">Word</button><button class="b d" onclick="del('${d.id}')">Hapus</button></td></tr>`).join('')}</table></div>`:`<div class="c" style="text-align:center;padding:40px"><div class="ic">📭</div><h3>Belum ada perangkat pembelajaran.</h3><p class="mu">Mulai buat perangkat pembelajaran pertama Anda dengan SMARTTEACHER.</p><button class="b" onclick="go('create')">+ Buat Perangkat</button></div>`}
+function vDash(){const l=docs(),n=t=>l.filter(d=>d.type==t).length;
+ A.innerHTML=shell(`<h1>Selamat datang di SMARTTEACHER, ${esc(U.name)}</h1><p class="mu">Mari buat perangkat pembelajaran hari ini.</p><p><button class="b l" onclick="go('create')">+ Buat Perangkat</button></p><div class="g">${[['Total Dokumen',l.length],['Modul Ajar',n('modul')],['RPP',n('rpp')],['LKPD',n('lkpd')],['Lainnya',n('tp')+n('rubrik')]].map(([a,b])=>`<div class="c"><div class="mu">${a}</div><div class="st">${b}</div></div>`).join('')}</div><h3>Buat Cepat</h3><p>${Object.keys(TY).map(k=>`<button class="b s" style="margin:0 6px 6px 0" onclick="go('form',{t:'${k}'})">${IC[k]} ${TY[k]}</button>`).join('')}</p><h3>Dokumen Terbaru</h3>${rows(l.slice().sort((a,b)=>b.updated-a.updated).slice(0,5))}`,'dash')}
+function vDocs(){A.innerHTML=shell(`<h1>Dokumen Saya</h1><div class="bar"><input id="q" placeholder="Cari dokumen..." oninput="fq()" style="font-weight:400"><select id="ft" onchange="fq()" style="width:auto"><option value="">Semua jenis</option>${Object.entries(TY).map(([k,v])=>`<option value="${k}">${v}</option>`).join('')}</select></div><div id="dl"></div>`,'docs');fq()}
+function fq(){const q=$('#q').value.toLowerCase(),t=$('#ft').value;$('#dl').innerHTML=rows(docs().filter(d=>(!t||d.type==t)&&(d.title+d.m.mapel+d.m.kelas+d.m.materi).toLowerCase().includes(q)).sort((a,b)=>b.updated-a.updated))}
+function vCreate(){A.innerHTML=shell(`<h1>Buat Perangkat</h1><p class="mu">Pilih jenis perangkat pembelajaran.</p><div class="g">${Object.keys(TY).map(k=>`<div class="c" style="cursor:pointer" onclick="go('form',{t:'${k}'})"><div class="ic">${IC[k]}</div><h3>${TY[k]}</h3></div>`).join('')}</div>`,'create')}
+const MOD={'Problem Based Learning':['Orientasi peserta didik pada masalah','Mengorganisasi peserta didik untuk belajar','Membimbing penyelidikan individu/kelompok','Mengembangkan dan menyajikan hasil karya','Menganalisis dan mengevaluasi proses pemecahan masalah'],'Project Based Learning':['Penentuan pertanyaan mendasar','Mendesain perencanaan proyek','Menyusun jadwal','Memonitor pelaksanaan proyek','Menguji hasil','Mengevaluasi pengalaman'],'Discovery Learning':['Stimulasi','Identifikasi masalah','Pengumpulan data','Pengolahan data','Pembuktian','Generalisasi'],'Inquiry Learning':['Orientasi','Merumuskan masalah','Mengajukan hipotesis','Mengumpulkan data','Menguji hipotesis','Merumuskan kesimpulan'],'Cooperative Learning':['Penyampaian tujuan dan motivasi','Penyajian informasi','Pembentukan kelompok belajar','Bimbingan kerja kelompok','Evaluasi dan presentasi','Pemberian penghargaan'],'Contextual Learning':['Konstruktivisme','Menemukan (inquiry)','Bertanya','Masyarakat belajar','Pemodelan','Refleksi dan penilaian autentik'],'Direct Instruction':['Menyampaikan tujuan','Demonstrasi','Latihan terbimbing','Umpan balik','Latihan mandiri'],'Blended Learning':['Kegiatan daring mandiri','Tatap muka klarifikasi konsep','Aktivitas kolaboratif','Penugasan daring','Evaluasi']};
+function vForm(){const p=U.p,t=X.t,v=(k,d)=>esc(p[k]||d||'');
+ A.innerHTML=shell(`<h1>${IC[t]} ${TY[t]}</h1><p class="mu">Isi data berikut. Perangkat akan disusun dalam format yang bisa Anda edit.</p><div class="c"><div class="f2">${[['sekolah','Nama sekolah',v('sekolah')],['guru','Nama guru',v('name')+(p.gelar?', '+esc(p.gelar):'')],['mapel','Mata pelajaran *',v('mapel')],['kelas','Kelas *',v('kelas')],['fase','Fase',v('fase')],['semester','Semester','Ganjil'],['tahun','Tahun ajaran',v('tahun')],['materi','Materi *',''],['waktu','Alokasi waktu','2 x 45 menit']].map(([k,l,d])=>`<label>${l}<input id="f_${k}" value="${d}"></label>`).join('')}<label>Model pembelajaran<select id="f_model">${Object.keys(MOD).map(m=>`<option>${m}</option>`).join('')}</select></label></div><label style="margin-top:12px">Tujuan pembelajaran (opsional, satu per baris; kosongkan untuk draf otomatis)<textarea id="f_tujuan" rows="3"></textarea></label><p><button class="b" onclick="gen()">Generate ${TY[t]}</button></p></div>`,'create')}
+const ul=a=>`<ul>${a.map(x=>`<li>${x}</li>`).join('')}</ul>`,ol=a=>`<ol>${a.map(x=>`<li>${x}</li>`).join('')}</ol>`,sc=(t,b)=>`<h2>${t}</h2>${b}`,dot=s=>esc(s)||'……………';
+function tbl(h,r){return`<table><tr>${h.map(x=>`<th>${x}</th>`).join('')}</tr>${r.map(x=>`<tr>${x.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</table>`}
+function build(t,f){const m=esc(f.materi),tj=f.tujuan?f.tujuan.split('\n').filter(Boolean).map(esc):[`Peserta didik mampu menjelaskan konsep dasar ${m}.`,`Peserta didik mampu menerapkan ${m} dalam contoh dan latihan.`,`Peserta didik mampu menganalisis dan merefleksikan penerapan ${m} secara mandiri maupun berkelompok.`],st=MOD[f.model];
+ const head=`<h1 style="text-align:center">${TY[t].toUpperCase()}</h1><p style="text-align:center"><b>${dot(f.sekolah)}</b></p><table>${[['Nama Guru',f.guru],['Mata Pelajaran',f.mapel],['Kelas / Fase',f.kelas+' / '+(f.fase||'…')],['Semester / Tahun Ajaran',f.semester+' / '+f.tahun],['Materi',f.materi],['Alokasi Waktu',f.waktu]].map(([a,b])=>`<tr><th style="width:34%;text-align:left">${a}</th><td>${dot(b)}</td></tr>`).join('')}</table>`;
+ const S={
+ ka:sc('Kompetensi Awal',`<p>Peserta didik telah memiliki pengetahuan dasar yang mendukung materi ${m}. (Sesuaikan dengan hasil asesmen diagnostik di kelas Anda.)</p>`),
+ pp:sc('Profil Pelajar Pancasila',ul(['Bernalar kritis','Mandiri','Bergotong royong'])),
+ sar:sc('Sarana dan Prasarana',ul(['Media: papan tulis / slide presentasi','Alat: laptop, proyektor, alat tulis','Bahan: lembar kerja, bahan bacaan','Sumber belajar: buku teks dan referensi relevan'])),
+ tuj:sc('Tujuan Pembelajaran',ol(tj)),
+ ind:sc('Indikator Ketercapaian',ol(tj.map(x=>x.replace('Peserta didik mampu','Peserta didik dapat')))),
+ mat:sc('Materi Pembelajaran',ul([`Konsep dasar ${m}`,`Contoh dan penerapan ${m}`,'Latihan dan pembahasan'])),
+ mod:sc('Model dan Metode',`<p>Model: <b>${esc(f.model)}</b>. Metode: ceramah interaktif, diskusi, tanya jawab, dan penugasan.</p>`),
+ pb:sc('Pemahaman Bermakna',`<p>Peserta didik memahami manfaat ${m} dan mampu mengaitkannya dengan situasi nyata.</p>`),
+ pm:sc('Pertanyaan Pemantik',ul([`Menurut kamu, mengapa ${m} penting dipelajari?`,`Di mana kamu pernah menjumpai ${m} dalam kehidupan sehari-hari?`,`Apa yang terjadi jika ${m} tidak dipahami dengan benar?`])),
+ keg:sc('Kegiatan Pembelajaran',`<h3>Pendahuluan (±10 menit)</h3>${ul(['Salam, doa, dan presensi','Apersepsi dan pertanyaan pemantik','Penyampaian tujuan pembelajaran'])}<h3>Kegiatan Inti (${esc(f.model)})</h3>${ol(st.map(x=>`${x}: kegiatan peserta didik terkait ${m}.`))}<h3>Penutup (±10 menit)</h3>${ul(['Menyimpulkan pembelajaran bersama','Refleksi dan umpan balik','Tugas tindak lanjut dan doa penutup'])}`),
+ as:sc('Asesmen',tbl(['Jenis','Bentuk','Waktu'],[['Diagnostik','Pertanyaan lisan / kuis singkat','Awal pembelajaran'],['Formatif','Observasi, diskusi, latihan','Selama pembelajaran'],['Sumatif','Tes tertulis / produk','Akhir materi']])),
+ rem:sc('Remedial','<p>Bimbingan ulang dan latihan tambahan bagi peserta didik yang belum mencapai tujuan pembelajaran.</p>'),
+ ay:sc('Pengayaan','<p>Tugas lanjutan atau studi kasus yang lebih menantang bagi peserta didik yang telah mencapai tujuan pembelajaran.</p>'),
+ ref:sc('Refleksi',`<p><b>Peserta didik:</b> Bagian mana dari ${m} yang paling kamu pahami? Bagian mana yang masih sulit?</p><p><b>Guru:</b> Apakah tujuan pembelajaran tercapai? Apa yang perlu diperbaiki pada pertemuan berikutnya?</p>`),
+ ttd:`<br><table style="border:0"><tr><td style="border:0;text-align:center">Mengetahui,<br>Kepala Sekolah<br><br><br><br>${dot(f.kepsek)}</td><td style="border:0;text-align:center"><br>Guru Mata Pelajaran<br><br><br><br>${dot(f.guru)}</td></tr></table><p style="color:#777;font-size:11px"><i>Draf ini dibuat dari templat SMARTTEACHER. Periksa dan sesuaikan sebelum digunakan; ini bukan dokumen resmi pemerintah.</i></p>`};
+ const O={modul:['ka','pp','sar','tuj','pb','pm','keg','as','rem','ay','ref','ttd'],rpp:['tuj','ind','mat','mod','sar','keg','as','rem','ay','ttd'],tp:['tuj','ttd']};
+ if(t=='lkpd')return head+sc('Identitas Peserta Didik','<p>Nama: ……………………… Kelas: ………… Kelompok: …………</p>')+S.tuj+sc('Petunjuk',ol(['Berdoalah sebelum mengerjakan.','Bacalah setiap instruksi dengan cermat.','Kerjakan secara mandiri atau berkelompok.']))+sc('Aktivitas',tbl(['No','Langkah Kegiatan','Hasil Pengamatan'],[1,2,3].map(n=>[n,`Lengkapi langkah kegiatan terkait ${m}.`,'']))) +sc('Pertanyaan',ol([`Jelaskan pengertian ${m} dengan kata-katamu sendiri.`,`Berikan satu contoh penerapan ${m}.`,`Apa kesulitan yang kamu temui?`]))+sc('Kesimpulan','<p>………………………………………………………………</p>')+S.ref+S.ttd;
+ if(t=='rubrik')return head+sc('Rubrik Penilaian',tbl(['Aspek','Skor 4','Skor 3','Skor 2','Skor 1'],['Pemahaman konsep','Ketepatan hasil','Kerja sama / partisipasi','Presentasi / komunikasi'].map(a=>[a,'Sangat baik','Baik','Cukup','Perlu bimbingan'])))+'<p>Nilai = (skor perolehan ÷ skor maksimal) × 100</p>'+S.ttd;
+ return head+O[t].map(k=>S[k]).join('')}
+function gen(){const f={};['sekolah','guru','mapel','kelas','fase','semester','tahun','materi','waktu','model','tujuan'].forEach(k=>f[k]=$('#f_'+k).value.trim());
+ if(!f.mapel||!f.kelas||!f.materi)return toast('Maaf, dokumen belum dapat dibuat. Periksa kembali data yang Anda masukkan.','e');
+ const t=X.t;A.innerHTML=shell('<div class="c" style="text-align:center;padding:50px"><div class="ic">⏳</div><p>SMARTTEACHER sedang menyusun perangkat pembelajaran...</p></div>');
+ setTimeout(()=>{const d={id:uid(),type:t,title:`${TY[t]} ${f.materi}`,m:f,html:build(t,f),created:Date.now(),updated:Date.now(),versions:[]};d.versions.push({t:Date.now(),h:d.html});const l=docs();l.push(d);if(!setDocs(l))return go('dash');toast(TY[t]+' berhasil dibuat.');go('editor',{id:d.id})},600)}
+function vEditor(){const d=docs().find(x=>x.id==X.id);if(!d)return go('docs');
+ A.innerHTML=shell(`<div class="bar"><input id="tt" value="${esc(d.title)}" oninput="ed()"><span id="st" class="mu">Tersimpan ✓</span></div><div class="bar"><button class="b s" onclick="pv(0)">✏️ Edit</button><button class="b s" onclick="pv(1)">👁 Preview</button><button class="b" onclick="persist(1);toast('Dokumen berhasil disimpan.')">💾 Simpan</button><button class="b s" onclick="hist()">🕘 Riwayat</button><button class="b s" onclick="dl('${d.id}')">⬇ Word</button><button class="b s" onclick="prn()">🖨 PDF / Cetak</button></div><div class="bar tb" id="tb">${[['B','bold'],['I','italic'],['U','underline'],['H','formatBlock','h2'],['• Daftar','insertUnorderedList'],['1. Daftar','insertOrderedList'],['↶','undo'],['↷','redo']].map(([l,c,v])=>`<button onclick="ex('${c}'${v?",'"+v+"'":''})">${l}</button>`).join('')}<button onclick="ex('insertHTML','<table><tr><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td></tr></table>')">▦ Tabel</button></div><div id="pp" class="paper" contenteditable="true" oninput="ed()">${d.html}</div>`,'docs');
+ if(X.pv)pv(1)}
+const ex=(c,v)=>{$('#pp').focus();document.execCommand(c,false,v||null);ed()};
+function pv(p){$('#pp').contentEditable=!p;$('#tb').style.display=p?'none':'flex'}
+function ed(){clearTimeout(T);$('#st').textContent='Menyimpan…';T=setTimeout(()=>persist(0),700)}
+function persist(v){if(V!='editor'||!$('#pp'))return;clearTimeout(T);const l=docs(),d=l.find(x=>x.id==X.id);if(!d)return;
+ d.html=$('#pp').innerHTML;d.title=$('#tt').value.trim()||d.title;d.updated=Date.now();if(v){d.versions.push({t:Date.now(),h:d.html});d.versions=d.versions.slice(-10)}
+ if(setDocs(l)&&$('#st'))$('#st').textContent='Tersimpan otomatis ✓'}
+addEventListener('visibilitychange',()=>persist(0));addEventListener('pagehide',()=>persist(0));
+addEventListener('offline',()=>toast('Koneksi terputus. Perubahan tetap tersimpan di perangkat ini.'));
+function hist(){persist(0);const d=docs().find(x=>x.id==X.id);modal(`<h3>Riwayat Perubahan</h3>${d.versions.map((v,i)=>`<p>Versi ${i+1} – ${fd(v.t)} ${new Date(v.t).toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'})} <button class="b s" onclick="rest(${i})">Pulihkan</button></p>`).reverse().join('')}<button class="b s" onclick="closeM()">Tutup</button>`)}
+function rest(i){const l=docs(),d=l.find(x=>x.id==X.id);d.html=d.versions[i].h;setDocs(l);closeM();go('editor',{id:d.id});toast('Versi '+(i+1)+' dipulihkan.')}
+function prn(){persist(0);pv(1);try{print()}catch(e){toast('Cetak tidak tersedia di sini. Gunakan Unduh Word.','e')}}
+function dup(id){const l=docs(),d=l.find(x=>x.id==id),n=JSON.parse(JSON.stringify(d));n.id=uid();n.title=d.title+' – Copy';n.created=n.updated=Date.now();n.versions=[{t:Date.now(),h:n.html}];l.push(n);setDocs(l);toast('Dokumen diduplikasi.');render()}
+function del(id){const d=docs().find(x=>x.id==id);modal(`<h3>Hapus dokumen?</h3><p>“${esc(d.title)}” akan dihapus permanen.</p><button class="b d" onclick="setDocs(docs().filter(x=>x.id!='${id}'));closeM();toast('Dokumen dihapus.');render()">Hapus</button> <button class="b s" onclick="closeM()">Batal</button>`)}
+function crc(u){const t=crc.t||(crc.t=[...Array(256)].map((_,n)=>{let c=n;for(let k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;return c>>>0}));let r=-1;for(const b of u)r=t[(r^b)&255]^(r>>>8);return(r^-1)>>>0}
+function zip(fs){const E=new TextEncoder(),P=[],C=[];let o=0,cs=0;
+ for(const[n,s]of fs){const nm=E.encode(n),d=E.encode(s),c=crc(d),h=new DataView(new ArrayBuffer(30)),g=new DataView(new ArrayBuffer(46));
+ h.setUint32(0,0x04034b50,true);h.setUint16(4,20,true);h.setUint32(14,c,true);h.setUint32(18,d.length,true);h.setUint32(22,d.length,true);h.setUint16(26,nm.length,true);P.push(h.buffer,nm,d);
+ g.setUint32(0,0x02014b50,true);g.setUint16(4,20,true);g.setUint16(6,20,true);g.setUint32(16,c,true);g.setUint32(20,d.length,true);g.setUint32(24,d.length,true);g.setUint16(28,nm.length,true);g.setUint32(42,o,true);C.push(g.buffer,nm);cs+=46+nm.length;o+=30+nm.length+d.length}
+ const z=new DataView(new ArrayBuffer(22));z.setUint32(0,0x06054b50,true);z.setUint16(8,fs.length,true);z.setUint16(10,fs.length,true);z.setUint32(12,cs,true);z.setUint32(16,o,true);return new Blob([...P,...C,z.buffer])}
+async function dl(id){persist(0);const d=docs().find(x=>x.id==id);let D=null;try{D=window.claude?await window.claude.use('downloads'):null}catch(e){}
+ if(!D)return toast('Unduhan tidak tersedia di sini. Gunakan tombol Cetak.','e');
+ const ns='http://schemas.openxmlformats.org/',body=`<html><head><meta charset="utf-8"><style>body{font-family:Arial;font-size:11pt}table{border-collapse:collapse;width:100%}td,th{border:1px solid #666;padding:4px}h2{font-size:13pt;border-bottom:1px solid #aaa}</style></head><body>${d.html}<p style="text-align:center;color:#666;font-size:9pt">SMARTTEACHER – Solusi Cerdas untuk Perangkat Pembelajaran Guru</p></body></html>`;
+ const blob=zip([['[Content_Types].xml',`<?xml version="1.0" encoding="UTF-8"?><Types xmlns="${ns}package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/><Override PartName="/word/afchunk.html" ContentType="text/html"/></Types>`],['_rels/.rels',`<?xml version="1.0" encoding="UTF-8"?><Relationships xmlns="${ns}package/2006/relationships"><Relationship Id="rId1" Type="${ns}officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/></Relationships>`],['word/document.xml',`<?xml version="1.0" encoding="UTF-8"?><w:document xmlns:w="${ns}wordprocessingml/2006/main" xmlns:r="${ns}officeDocument/2006/relationships"><w:body><w:altChunk r:id="rId1"/><w:sectPr><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="1134" w:right="1134" w:bottom="1134" w:left="1134" w:header="708" w:footer="708" w:gutter="0"/></w:sectPr></w:body></w:document>`],['word/_rels/document.xml.rels',`<?xml version="1.0" encoding="UTF-8"?><Relationships xmlns="${ns}package/2006/relationships"><Relationship Id="rId1" Type="${ns}officeDocument/2006/relationships/aFChunk" Target="afchunk.html"/></Relationships>`],['word/afchunk.html',body]]);
+ try{await D.save({filename:d.title.replace(/[^\w\- ]+/g,'').trim()+'.docx',data:blob});toast('File Word berhasil dibuat.')}catch(e){if(e.code!='declined')toast('Maaf, file belum dapat diunduh.','e')}}
+try{const s=L('st_s',null);U=s?users().find(u=>u.id==s)||null:null}catch(e){}
+V=U?'dash':'landing';render();
+</script></body></html>
